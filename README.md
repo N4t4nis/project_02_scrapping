@@ -10,9 +10,12 @@ dans un seul fichier.
 [télécharger python](https://www.python.org/downloads/)
 
 ### Lancer l'environnement virtuel
-*Dans le dossier du projet, depuis le terminal:*
-1. Créer un environnement virtuel : python3 -m venv [nom]*
-2. Activer l'environnement virtuel : source venv/Scripts/activate
+installer le module :
+`pip install virtualenv`
+
+*Depuis le terminal aller dans le dossier du projet :*
+1. Créer un environnement virtuel : virtualenv -p python3 [nom]
+2. Activer l'environnement virtuel : source [nom]/bin/activate
 3. Désactiver l'environnement virtuel : deactivate
 
 
@@ -25,7 +28,7 @@ dans un seul fichier.
 
 Lancer assemblage_final.py avec votre éditeur de text et lancer l'exécution
 
-**Pour executer votre programme depuis un terminal:**
+**Pour executer le programme depuis un terminal :**
 1. Aller dans le dossier du programme 
 2. Taper la commande `python3 assemblage_final.py"`
 
