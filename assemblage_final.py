@@ -115,7 +115,7 @@ def download_images():
     for lien_prod in liens_produits:
         infos_produits(lien_prod)
     # télécharge toutes les images dans un dossier, avec leurs nom
-        dossier = b'images_download/' + str.encode(titre.text) + b'.jpg'
+        dossier = b'images_download/' + str.encode(titre.text.replace("/", "_")) + b'.jpg'
         r = requests.get(image_url, stream=True)
         with open(dossier, "wb") as jpg_test:
             jpg_test.write(r.content)
