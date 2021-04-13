@@ -3,7 +3,11 @@
 Programme qui consiste à scrapper le site booktoscrap. Ce programme extrait le données de chaque livre
 et l'exporte dans un fichier CSV différent pour chaque catégorie de livre, puis il télécharge les images de chaque livre
 dans un seul fichier.
+### installer le programme
+Une fois Git installé sur votre ordinateur :
+1. Taper dans votre terminal :`git clone [lien_du_programme]` 
 
+*vous écuperer le lien du programme en cliquant sur le bouton vert "Code" de Github*
 ### Installer Python
 *ce programme est nécessite python pour être éxecuté*
 

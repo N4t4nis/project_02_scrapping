@@ -9,6 +9,7 @@ from pprint import pprint
 list_all_category = []
 liens_produits = []
 
+
 # Fonction qui récupère le lien de toutes les catégorie
 def all_category():
     url = "http://books.toscrape.com"
@@ -32,7 +33,6 @@ def scrap_1_category(category):
     for urls in product_url:
         a = urls.find("a")
         liens = a["href"][9:]
-
         liens_produits.append("http://books.toscrape.com/catalogue/" + liens)
     while soup.find("li", {"class": "next"}) is not None:
         # recupère le bouton next de chaque page
@@ -54,6 +54,7 @@ def scrap_1_category(category):
 def infos_produits(lien):
     reponse_lien_prod = requests.get(lien)
     soup = BeautifulSoup(reponse_lien_prod.text, "html.parser")
+    global titre, scrap_image_url, image_url
     titre = soup.find("h1")
     scrap_image_url = soup.find("div", {"class": "item active"}).find("img")
     image_url = "http://books.toscrape.com" + scrap_image_url.get("src")[5:]
@@ -80,13 +81,7 @@ def infos_produits(lien):
         table_list[6],
         image_url + " Tag: " + alt_image,
     ]
-    # télécharge toutes les images dans un dossier, avec leurs nom
-    dossier = b"images_download/" + str.encode(titre.text.replace("/", "_")) + b".jpg"
-    r = requests.get(image_url, stream=True)
-    with open(dossier, "wb") as jpg_test:
-        jpg_test.write(r.content)
-        pprint(titre.text)
-    return recup_all_info, jpg_test
+    return recup_all_info
 
 
 # Fonction qui télécharge les données dans un dossier csv différent pour chaques catégories
@@ -116,13 +111,22 @@ def csv_category(category):
     return liste
 
 
-
+def download_images():
+    for lien_prod in liens_produits:
+        infos_produits(lien_prod)
+    # télécharge toutes les images dans un dossier, avec leurs nom
+        dossier = b'images_download/' + str.encode(titre.text) + b'.jpg'
+        r = requests.get(image_url, stream=True)
+        with open(dossier, "wb") as jpg_test:
+            jpg_test.write(r.content)
+            pprint(titre.text)
 
 def main():
     i = 1
     for category in all_category():
         print("Categorie numero", i)
         csv_category(category)
+        download_images()
         liens_produits.clear()
         i += 1
 
